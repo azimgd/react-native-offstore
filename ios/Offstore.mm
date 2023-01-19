@@ -25,12 +25,12 @@ RCT_EXPORT_MODULE()
     return @NO;
   }
 
-  auto jsiRuntime = (jsi::Runtime*)cxxBridge.runtime;
-  if (jsiRuntime == nullptr) {
+  auto runtime = (jsi::Runtime*)cxxBridge.runtime;
+  if (runtime == nullptr) {
     return @NO;
   }
 
-  offstore::setup(*jsiRuntime);
+  offstore::setup(*runtime);
 
   return @YES;
 }

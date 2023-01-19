@@ -2,9 +2,10 @@
 #define OFFSTORE_H
 
 #include <jsi/jsi.h>
+using namespace::facebook::jsi;
 
 namespace offstore {
-  void setup(facebook::jsi::Runtime& jsiRuntime);
+  void setup(Runtime& runtime);
 }
 
 #endif /* OFFSTORE_H */
