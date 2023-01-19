@@ -1,4 +1,6 @@
 #include <jni.h>
+#include <jsi/jsi.h>
+#include <ReactCommon/CallInvokerHolder.h>
 #include "react-native-offstore.h"
 
 extern "C"

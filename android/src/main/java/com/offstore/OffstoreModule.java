@@ -20,7 +20,7 @@ public class OffstoreModule extends NativeOffstoreSpec {
   }
 
   static {
-    System.loadLibrary("cpp");
+    System.loadLibrary("offstore");
   }
 
   private static native double nativeMultiply(double a, double b);
