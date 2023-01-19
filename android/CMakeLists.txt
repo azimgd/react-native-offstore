@@ -10,6 +10,7 @@ set (CMAKE_CXX_STANDARD 17)
 # Specifies a path to native header files.
 include_directories(
   ../cpp
+  ../includes
 )
 
 add_library(

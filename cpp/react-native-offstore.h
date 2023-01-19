@@ -1,7 +1,6 @@
 #ifndef OFFSTORE_H
 #define OFFSTORE_H
 
-//#include <jni.h>
 #include <jsi/jsi.h>
 
 namespace offstore {
