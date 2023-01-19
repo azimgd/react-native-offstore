@@ -4,7 +4,8 @@
 #include "react-native-offstore.h"
 
 extern "C"
-JNIEXPORT jint JNICALL
-Java_com_offstore_OffstoreModule_nativeMultiply(JNIEnv *env, jclass type, jdouble a, jdouble b) {
-    return offstore::multiply(a, b);
+JNIEXPORT void JNICALL
+Java_com_offstore_OffstoreModule_nativeSetup(JNIEnv *env, jclass type, long jsiPtr) {
+    auto runtime = reinterpret_cast<facebook::jsi::Runtime*>(jsiPtr);
+    offstore::setup(*runtime);
 }

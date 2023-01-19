@@ -1,12 +1,38 @@
 #import "Offstore.h"
+#import <ReactCommon/RCTTurboModule.h>
+#import <jsi/jsi.h>
+#import <React/RCTBridge+Private.h>
+#import <React/RCTUtils.h>
+
+using namespace facebook;
 
 @implementation Offstore
+
+@synthesize bridge = _bridge;
+@synthesize methodQueue = _methodQueue;
+
++ (BOOL)requiresMainQueueSetup {
+  return YES;
+}
+
 RCT_EXPORT_MODULE()
 
-- (NSNumber *)multiply:(double)a b:(double)b {
-    NSNumber *result = @(offstore::multiply(a, b));
+- (NSNumber *)setup {
+  RCTBridge* bridge = [RCTBridge currentBridge];
+  RCTCxxBridge* cxxBridge = (RCTCxxBridge*)bridge;
+  
+  if (cxxBridge == nullptr) {
+    return @NO;
+  }
 
-    return result;
+  auto jsiRuntime = (jsi::Runtime*)cxxBridge.runtime;
+  if (jsiRuntime == nullptr) {
+    return @NO;
+  }
+
+  offstore::setup(*jsiRuntime);
+
+  return @YES;
 }
 
 // Don't compile this code when we build for the old architecture.
@@ -14,7 +40,7 @@ RCT_EXPORT_MODULE()
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
     (const facebook::react::ObjCTurboModule::InitParams &)params
 {
-    return std::make_shared<facebook::react::NativeOffstoreSpecJSI>(params);
+  return std::make_shared<facebook::react::NativeOffstoreSpecJSI>(params);
 }
 #endif
 

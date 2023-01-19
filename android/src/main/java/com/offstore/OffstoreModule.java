@@ -23,12 +23,11 @@ public class OffstoreModule extends NativeOffstoreSpec {
     System.loadLibrary("offstore");
   }
 
-  private static native double nativeMultiply(double a, double b);
+  private static native void nativeSetup(long jsiPtr);
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @Override
-  public double multiply(double a, double b) {
-    return nativeMultiply(a, b);
+  public boolean setup() {
+    nativeSetup(getReactApplicationContext().getJavaScriptContextHolder().get());
+    return true;
   }
 }

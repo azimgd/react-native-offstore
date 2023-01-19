@@ -1,8 +1,11 @@
 #ifndef OFFSTORE_H
 #define OFFSTORE_H
 
+//#include <jni.h>
+#include <jsi/jsi.h>
+
 namespace offstore {
-  double multiply(double a, double b);
+  void setup(facebook::jsi::Runtime& jsiRuntime);
 }
 
 #endif /* OFFSTORE_H */

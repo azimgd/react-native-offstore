@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-offstore';
+import { setup } from 'react-native-offstore';
 
-const result = multiply(3, 7);
+setup();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result: {33}</Text>
     </View>
   );
 }

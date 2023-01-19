@@ -1,7 +1,7 @@
 #include "react-native-offstore.h"
 
 namespace offstore {
-	double multiply(double a, double b) {
-		return a * b;
+	void setup(facebook::jsi::Runtime& jsiRuntime) {
+		jsiRuntime.global().setProperty(jsiRuntime, "__OffstoreProxy", facebook::jsi::Value(true));
 	}
 }

@@ -12,11 +12,11 @@ npm install react-native-offstore
 
 
 ```js
-import { multiply } from 'react-native-offstore';
+import { setup } from 'react-native-offstore';
 
 // ...
 
-const result = multiply(3, 7);
+const result = setup(3, 7);
 ```
 
 ## Contributing
