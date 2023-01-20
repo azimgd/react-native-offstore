@@ -24,13 +24,16 @@ namespace offstore {
       return String::createFromUtf8(runtime, state.dump().c_str());
     }
 
-    void set(Runtime& runtime, const Value& value) {
+    bool set(Runtime& runtime, const Value& value) {
       if (!value.isString()) {
         JSError(runtime, "[react-native-offstore] only string value supported for assignment, consider wrapping your payload with JSON.stringify beforehand.");
-        return;
+        return false;
       }
 
+      string temp = state.dump().c_str();
       state = json::parse(value.getString(runtime).utf8(runtime));
+
+      return state.dump() != temp;
     }
   };
 }
