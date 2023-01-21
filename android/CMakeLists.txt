@@ -1,6 +1,8 @@
 project(offstore)
 cmake_minimum_required(VERSION 3.4.1)
 
+set (CMAKE_CXX_FLAGS "-DFOLLY_NO_CONFIG=1 -DFOLLY_HAVE_CLOCK_GETTIME=1 -DFOLLY_HAVE_MEMRCHR=1 -DFOLLY_USE_LIBCPP=1 -DFOLLY_MOBILE=1 -DON_ANDROID -DONANDROID")
+
 set (PACKAGE_NAME "offstore")
 set (BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
 
@@ -37,6 +39,7 @@ target_link_libraries(
   offstore
   ${log-lib}
   fbjni
+  ReactAndroid::folly_runtime
   ReactAndroid::jsi
   ReactAndroid::turbomodulejsijni
   ReactAndroid::fabricjni
