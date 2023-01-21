@@ -3,9 +3,10 @@
 
 #include <jsi/jsi.h>
 using namespace::facebook::jsi;
+using namespace::std;
 
 namespace offstore {
-  void setup(Runtime& runtime);
+  void setup(Runtime& runtime, string temporaryDirectory);
 }
 
 #endif /* OFFSTORE_H */

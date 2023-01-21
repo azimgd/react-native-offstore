@@ -1,6 +1,7 @@
 #include <jsi/jsi.h>
-#include "state-object.cpp"
 #include "state-dispatcher.cpp"
+#include "state-object.cpp"
+#include "state-cache.cpp"
 
 using namespace::std;
 using namespace::facebook::jsi;
@@ -9,13 +10,20 @@ namespace offstore {
   class NativeHostObject : public HostObject {
 
   public:
-    explicit NativeHostObject() {
+    explicit NativeHostObject(Runtime& runtime, string temporaryDirectory) {
+      cachePtr = make_shared<NativeStateCache>(temporaryDirectory);
       statePtr = make_shared<NativeStateObject>();
       dispatcherPtr = make_shared<NativeStateDispatcher>();
+      
+      /**
+        * Hydrate initial state from cache
+       */
+      statePtr->set(runtime, String::createFromUtf8(runtime, cachePtr->read()));
     }
     virtual ~NativeHostObject() {}
 
   protected:
+    shared_ptr<NativeStateCache> cachePtr;
     shared_ptr<NativeStateObject> statePtr;
     shared_ptr<NativeStateDispatcher> dispatcherPtr;
     
@@ -60,7 +68,15 @@ namespace offstore {
       if (prop == "state") {
         bool changed = statePtr->set(runtime, value);
         if (changed) {
+          /**
+            * Send updated state to all subscribed callbacks
+           */
           dispatcherPtr->dispatchAll(runtime, statePtr->get(runtime));
+          
+          /**
+            * Persist state into phone's disk cache
+           */
+          cachePtr->write((statePtr->get(runtime)).getString(runtime).utf8(runtime));
         }
       }
     }

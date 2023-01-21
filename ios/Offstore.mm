@@ -29,8 +29,9 @@ RCT_EXPORT_MODULE()
   if (runtime == nullptr) {
     return @NO;
   }
-
-  offstore::setup(*runtime);
+  
+  NSString *temporaryDirectory = NSTemporaryDirectory();
+  offstore::setup(*runtime, [temporaryDirectory UTF8String]);
 
   return @YES;
 }

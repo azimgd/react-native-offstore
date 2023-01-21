@@ -7,9 +7,8 @@ using namespace::std;
 using namespace::facebook::jsi;
 
 namespace offstore {
-	void setup(Runtime& runtime) {
-    NativeHostObject hostObject;
-    shared_ptr<NativeHostObject> hostObjectBinding = make_shared<NativeHostObject>(move(hostObject));
+	void setup(Runtime& runtime, string temporaryDirectory) {
+    shared_ptr<NativeHostObject> hostObjectBinding = make_shared<NativeHostObject>(runtime, temporaryDirectory);
     Object hostObjectJSI = Object::createFromHostObject(runtime, hostObjectBinding);
     
     runtime.global().setProperty(runtime, "__OffstoreHostObject", hostObjectJSI);

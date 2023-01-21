@@ -32,8 +32,10 @@ namespace offstore {
 
       string temp = state.dump().c_str();
       state = json::parse(value.getString(runtime).utf8(runtime));
+      string stateStringified = state.dump();
+      bool stateHasChanged = stateStringified != temp;
 
-      return state.dump() != temp;
+      return stateHasChanged;
     }
   };
 }
