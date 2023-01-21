@@ -30,12 +30,16 @@ namespace offstore {
         return false;
       }
 
-      string temp = state.dump().c_str();
-      state = json::parse(value.getString(runtime).utf8(runtime));
-      string stateStringified = state.dump();
-      bool stateHasChanged = stateStringified != temp;
+      try {
+        string temp = state.dump().c_str();
+        state = json::parse(value.getString(runtime).utf8(runtime));
+        string stateStringified = state.dump();
+        bool stateHasChanged = stateStringified != temp;
 
-      return stateHasChanged;
+        return stateHasChanged;
+      } catch (json::exception &error) {
+        return false;
+      }
     }
   };
 }

@@ -5,8 +5,11 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_offstore_OffstoreModule_nativeSetup(JNIEnv *env, jclass type, long jsiPtr, facebook::jni::alias_ref<facebook::react::CallInvokerHolder::javaobject> jsCallInvokerHolder, facebook::jni::alias_ref<facebook::jni::JString> temporaryDirectory) {
+Java_com_offstore_OffstoreModule_nativeSetup(JNIEnv *env, jclass type, long jsiPtr, jstring temporaryDirectory) {
     auto runtime = reinterpret_cast<facebook::jsi::Runtime*>(jsiPtr);
-    auto jsCallInvoker = jsCallInvokerHolder->cthis()->getCallInvoker();
-    offstore::setup(*runtime, temporaryDirectory->toStdString());
+
+    jboolean isCopy;
+    const char *convertedValue = (env)->GetStringUTFChars(temporaryDirectory, &isCopy);
+
+    offstore::setup(*runtime, convertedValue);
 }

@@ -24,13 +24,12 @@ public class OffstoreModule extends NativeOffstoreSpec {
     System.loadLibrary("offstore");
   }
 
-  private static native void nativeSetup(long jsiPtr, CallInvokerHolderImpl jsCallInvokerHolder, String temporaryDirectory);
+  private static native void nativeSetup(long jsiPtr, String temporaryDirectory);
 
   @Override
   public boolean setup() {
     nativeSetup(
       getReactApplicationContext().getJavaScriptContextHolder().get(),
-      (CallInvokerHolderImpl)getReactApplicationContext().getCatalystInstance().getJSCallInvokerHolder(),
       getReactApplicationContext().getCacheDir().getAbsolutePath()
     );
     return true;
