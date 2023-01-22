@@ -4,10 +4,11 @@
 
 using namespace::nlohmann;
 using namespace::std;
+using namespace::facebook::react;
 using namespace::facebook::jsi;
 
 namespace offstore {
-	void setup(Runtime& runtime, string temporaryDirectory) {
+	void setup(Runtime& runtime, shared_ptr<CallInvoker> jsCallInvoker, string temporaryDirectory) {
     shared_ptr<NativeHostObject> hostObjectBinding = make_shared<NativeHostObject>(runtime, temporaryDirectory);
     Object hostObjectJSI = Object::createFromHostObject(runtime, hostObjectBinding);
     

@@ -31,7 +31,7 @@ RCT_EXPORT_MODULE()
   }
   
   NSString *temporaryDirectory = NSTemporaryDirectory();
-  offstore::setup(*runtime, [temporaryDirectory UTF8String]);
+  offstore::setup(*runtime, bridge.jsCallInvoker, [temporaryDirectory UTF8String]);
 
   return @YES;
 }
