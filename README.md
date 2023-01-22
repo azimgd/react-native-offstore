@@ -1,22 +1,48 @@
 # react-native-offstore
 
-react-native-offstore
+**JSI powered, persistent state management for React Native.**
+
+Offstore is a simple, yet powerful, state management solution for React Native. It is built on top of the JSI + Turbo Modules, which allows for fast, bridgeless and synchronous state access and persistence.
+
+## Requirements
+
+React Native 0.71 or higher. Android and iOS are supported.
 
 ## Installation
 
 ```sh
-npm install react-native-offstore
+yarn add react-native-offstore
 ```
 
 ## Usage
 
-
 ```js
-import { setup } from 'react-native-offstore';
+import * as Offstore from 'react-native-offstore';
 
-// ...
+/**
+ * Sets up the Offstore package environment
+ */
+Offstore.setup();
 
-const result = setup(3, 7);
+/**
+ * Read state synchronously
+ */
+const state = Offstore.getState();
+
+/**
+ * Write state synchronously
+ */
+Offstore.setState({version: 1.5, data: ['optical', 'matrix', 'konflict']});
+
+/**
+ * Subscribe to state changes
+ */
+const unsubscribe = Offstore.subscribe(console.log);
+
+/**
+ * Unsubscribe from state changes
+ */
+unsubscribe();
 ```
 
 ## Contributing

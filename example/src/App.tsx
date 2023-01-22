@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { setup } from 'react-native-offstore';
+import * as Offstore from 'react-native-offstore';
 
-setup();
+Offstore.setup();
 
 export default function App() {
   return (
