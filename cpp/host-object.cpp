@@ -2,6 +2,7 @@
 #include "state-dispatcher.cpp"
 #include "state-object.cpp"
 #include "state-cache.cpp"
+#include "JsiWorklet.h"
 
 using namespace::std;
 using namespace::facebook::jsi;

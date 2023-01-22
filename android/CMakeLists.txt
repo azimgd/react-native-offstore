@@ -13,6 +13,7 @@ set (CMAKE_CXX_STANDARD 17)
 include_directories(
   ../cpp
   ../includes
+  ../react-native-worklets/
 )
 
 add_library(
@@ -34,6 +35,18 @@ find_package(ReactAndroid REQUIRED CONFIG)
 find_library(log-lib log)
 
 add_library(fbjni ALIAS fbjni::fbjni)
+
+target_include_directories(
+  offstore
+  PRIVATE
+  ../react-native-worklets/cpp
+  ../react-native-worklets/cpp/base
+  ../react-native-worklets/cpp/dispatch
+  ../react-native-worklets/cpp/decorators
+  ../react-native-worklets/cpp/sharedvalues
+  ../react-native-worklets/cpp/wrappers
+
+)
 
 target_link_libraries(
   offstore
