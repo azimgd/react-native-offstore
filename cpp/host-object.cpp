@@ -30,7 +30,28 @@ namespace offstore {
     Value subscribe(Runtime &runtime) {
       return Function::createFromHostFunction(
         runtime,
-        PropNameID::forAscii(runtime, "watch"),
+        PropNameID::forAscii(runtime, "subscribe"),
+        2,
+        [this, dispatcherPtr = dispatcherPtr](
+          Runtime &runtime,
+          const Value &thisValue,
+          const Value *arguments,
+          size_t count
+        ) -> Value {
+          dispatcherPtr->subscribe(
+            runtime,
+            arguments[0].asString(runtime).utf8(runtime),
+            arguments[1].asObject(runtime).asFunction(runtime)
+          );
+          
+          return Value();
+        });
+    };
+    
+    Value patch(Runtime &runtime) {
+      return Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "patch"),
         1,
         [this, dispatcherPtr = dispatcherPtr](
           Runtime &runtime,
@@ -38,10 +59,10 @@ namespace offstore {
           const Value *arguments,
           size_t count
         ) -> Value {
-          auto callbackId = arguments[0].asString(runtime).utf8(runtime);
-          auto callbackFn = arguments[1].asObject(runtime).asFunction(runtime);
-
-          dispatcherPtr->subscribe(runtime, callbackId, move(callbackFn));
+          statePtr->patch(
+            runtime,
+            arguments[0]
+          );
           
           return Value();
         });
@@ -57,6 +78,10 @@ namespace offstore {
       
       if (prop == "subscribe") {
         return subscribe(runtime);
+      }
+      
+      if (prop == "patch") {
+        return patch(runtime);
       }
       
       return Value::undefined();

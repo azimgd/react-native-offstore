@@ -32,7 +32,12 @@ const state = Offstore.getState();
 /**
  * Write state synchronously
  */
-Offstore.setState({version: 1.5, data: ['optical', 'matrix', 'konflict']});
+Offstore.setState({ app: { version: 1.5, beta: false }, data: ['optical', 'matrix', 'konflict'] });
+
+/**
+ * JSON merge patch https://tools.ietf.org/html/rfc7386
+ */
+Offstore.patchState({ app: { beta: true } });
 
 /**
  * Subscribe to state changes

@@ -4,6 +4,7 @@ declare global {
   function subscribe(callback: (payload: string) => void): void;
   var __OffstoreProxy: object | null;
   var __OffstoreHostObject: {
+    patch: (payload: any) => void;
     subscribe: (property: string, payload: any) => void;
     unsubscribe: (property: string) => void;
     state: any;
@@ -30,6 +31,13 @@ export function getState(): any {
  */
 export function setState(payload: any): any {
   global.__OffstoreHostObject.state = JSON.stringify(payload);
+}
+
+/**
+ * Patch merge Offstore state object.
+ */
+export function patchState(payload: any): any {
+  global.__OffstoreHostObject.patch(JSON.stringify(payload));
 }
 
 /**
