@@ -6,13 +6,23 @@ Offstore is a simple, yet powerful, state management solution for React Native. 
 
 ## Requirements
 
-React Native 0.71 or higher. Android and iOS are supported.
+React Native 0.71 or higher. Android and iOS are supported. Works only with new architecture projects.
 
 ## Installation
 
 ```sh
 yarn add react-native-offstore
 ```
+
+### iOS
+
+1. Make sure new architecture is enabled. In your `Podfile` add:
+
+```ruby
+ENV['RCT_NEW_ARCH_ENABLED'] = '1'
+```
+
+2. Run `pod install`
 
 ## Usage
 
