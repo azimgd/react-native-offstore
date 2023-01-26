@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import twitter from './twitter.json';
 import twittel from './twittel.json';
@@ -42,7 +42,7 @@ export default function App() {
   const [timeExpensive, setTimeExpensive] = React.useState(0);
   const [timeCheap, setTimeCheap] = React.useState(0);
 
-  React.useEffect(() => {
+  const runBenchmarks = React.useCallback(() => {
     Promise.resolve()
       .then(() =>
         setupExpensiveParallelBenchmark()
@@ -56,10 +56,36 @@ export default function App() {
       );
   }, []);
 
+  React.useEffect(() => {
+    runBenchmarks();
+  }, [runBenchmarks]);
+
+  const pollStorage = React.useCallback(() => {
+    setInterval(() => {
+      AsyncStorage.getItem(STORAGE_CHEAP_KEY);
+    }, 20);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>AsyncStorage (~15K/Loc): {timeExpensive.toFixed(2)} ms</Text>
-      <Text>AsyncStorage (400/Loc): {timeCheap.toFixed(2)} ms</Text>
+      <Text style={styles.item}>
+        AsyncStorage (~15K/Loc): {timeExpensive.toFixed(2)} ms
+      </Text>
+      <Text style={styles.item}>
+        AsyncStorage (400/Loc): {timeCheap.toFixed(2)} ms
+      </Text>
+      <TouchableOpacity
+        onPress={runBenchmarks}
+        style={[styles.buttonDefault, styles.item]}
+      >
+        <Text>Refresh</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={pollStorage}
+        style={[styles.buttonDanger, styles.item]}
+      >
+        <Text>Expensive polling</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -67,5 +93,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
+  },
+  item: {
+    marginBottom: 10,
+  },
+  buttonDefault: {
+    backgroundColor: 'red',
+    padding: 10,
+  },
+  buttonDanger: {
+    backgroundColor: 'red',
+    padding: 10,
   },
 });
