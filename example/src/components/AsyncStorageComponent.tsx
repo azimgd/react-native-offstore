@@ -3,17 +3,24 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import twitter from './twitter.json';
+import twittel from './twittel.json';
 
-export const STORAGE_KEY = 'item';
-export const STORAGE_PAYLOAD = JSON.stringify(twitter);
+export const STORAGE_EXPENSIVE_KEY = 'expensive';
+export const STORAGE_EXPENSIVE_PAYLOAD = JSON.stringify(twitter);
+export const STORAGE_CHEAP_KEY = 'cheap';
+export const STORAGE_CHEAP_PAYLOAD = JSON.stringify(twittel);
 
-export const setupParallelBenchmark = async () => {
-  AsyncStorage.setItem(STORAGE_KEY, STORAGE_PAYLOAD);
+export const setupExpensiveParallelBenchmark = async () => {
+  AsyncStorage.setItem(STORAGE_EXPENSIVE_KEY, STORAGE_EXPENSIVE_PAYLOAD);
 };
 
-export const performParallelBenchmark = async () => {
+export const setupCheapParallelBenchmark = async () => {
+  AsyncStorage.setItem(STORAGE_CHEAP_KEY, STORAGE_CHEAP_PAYLOAD);
+};
+
+export const performExpensiveParallelBenchmark = async () => {
   const data = Array.from(Array(100).keys());
-  const promises = data.map(() => AsyncStorage.getItem(STORAGE_KEY));
+  const promises = data.map(() => AsyncStorage.getItem(STORAGE_EXPENSIVE_KEY));
 
   const start = performance.now();
   await Promise.all(promises);
@@ -21,18 +28,38 @@ export const performParallelBenchmark = async () => {
   return end - start;
 };
 
-performParallelBenchmark();
+export const performCheapParallelBenchmark = async () => {
+  const data = Array.from(Array(100).keys());
+  const promises = data.map(() => AsyncStorage.getItem(STORAGE_CHEAP_KEY));
+
+  const start = performance.now();
+  await Promise.all(promises);
+  const end = performance.now();
+  return end - start;
+};
 
 export default function App() {
-  const [time, setTime] = React.useState(0);
+  const [timeExpensive, setTimeExpensive] = React.useState(0);
+  const [timeCheap, setTimeCheap] = React.useState(0);
 
   React.useEffect(() => {
-    setupParallelBenchmark().then(performParallelBenchmark).then(setTime);
+    Promise.resolve()
+      .then(() =>
+        setupExpensiveParallelBenchmark()
+          .then(performExpensiveParallelBenchmark)
+          .then(setTimeExpensive)
+      )
+      .then(() =>
+        setupCheapParallelBenchmark()
+          .then(performCheapParallelBenchmark)
+          .then(setTimeCheap)
+      );
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>AsyncStorage: {time.toFixed(2)} ms</Text>
+      <Text>AsyncStorage (~15K/Loc): {timeExpensive.toFixed(2)} ms</Text>
+      <Text>AsyncStorage (400/Loc): {timeCheap.toFixed(2)} ms</Text>
     </View>
   );
 }
