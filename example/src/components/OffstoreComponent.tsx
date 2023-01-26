@@ -19,7 +19,7 @@ export const setupCheapParallelBenchmark = () => {
 };
 
 export const performExpensiveParallelBenchmark = () => {
-  const data = Array.from(Array(500).keys());
+  const data = Array.from(Array(100).keys());
 
   const start = performance.now();
   data.map(() => Offstore.getState());
@@ -28,7 +28,7 @@ export const performExpensiveParallelBenchmark = () => {
 };
 
 export const performCheapParallelBenchmark = () => {
-  const data = Array.from(Array(500).keys());
+  const data = Array.from(Array(100).keys());
 
   const start = performance.now();
   data.map(() => Offstore.getState());
@@ -47,10 +47,6 @@ export default function App() {
     setupCheapParallelBenchmark();
     setTimeCheap(performCheapParallelBenchmark());
   }, []);
-
-  React.useEffect(() => {
-    runBenchmarks();
-  }, [runBenchmarks]);
 
   const pollStorage = React.useCallback(() => {
     setInterval(() => {
@@ -90,7 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonDefault: {
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
     padding: 10,
   },
   buttonDanger: {

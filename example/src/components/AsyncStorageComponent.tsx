@@ -56,10 +56,6 @@ export default function App() {
       );
   }, []);
 
-  React.useEffect(() => {
-    runBenchmarks();
-  }, [runBenchmarks]);
-
   const pollStorage = React.useCallback(() => {
     setInterval(() => {
       AsyncStorage.getItem(STORAGE_CHEAP_KEY);
@@ -98,7 +94,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonDefault: {
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
     padding: 10,
   },
   buttonDanger: {
