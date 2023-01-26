@@ -91,18 +91,13 @@ namespace offstore {
       auto prop = name.utf8(runtime);
 
       if (prop == "state") {
-        bool changed = statePtr->set(runtime, value);
-        if (changed) {
-          /**
-            * Send updated state to all subscribed callbacks
-           */
-          dispatcherPtr->dispatchAll(runtime, statePtr->get(runtime));
-          
-          /**
-            * Persist state into phone's disk cache
-           */
-          cachePtr->write((statePtr->get(runtime)).getString(runtime).utf8(runtime));
-        }
+        statePtr->set(runtime, value);
+
+        // Send updated state to all subscribed callbacks
+        dispatcherPtr->dispatchAll(runtime, statePtr->get(runtime));
+
+        // Persist state into phone's disk cache
+        cachePtr->write((statePtr->get(runtime)).getString(runtime).utf8(runtime));
       }
     }
   };

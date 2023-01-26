@@ -1,8 +1,6 @@
 #include "react-native-offstore.h"
-#include "json.hpp"
 #include "host-object.cpp"
 
-using namespace::nlohmann;
 using namespace::std;
 using namespace::facebook::react;
 using namespace::facebook::jsi;

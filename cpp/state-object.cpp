@@ -13,51 +13,36 @@ namespace offstore {
     virtual ~NativeStateObject() {}
 
   protected:
-    json state;
+    Value state;
     
   public:
     Value get(Runtime &runtime) {
-      if (state.is_null()) {
-        return Value::null();
-      }
-
-      return String::createFromUtf8(runtime, state.dump().c_str());
+      return state.getString(runtime);
     }
 
-    bool set(Runtime &runtime, const Value &value) {
-      if (!value.isString()) {
-        JSError(runtime, "[react-native-offstore] only string value supported for set, consider wrapping your payload with JSON.stringify beforehand.");
-        return false;
+    void set(Runtime &runtime, const Value &payload) {
+      if (!payload.isString()) {
+        return;
       }
 
       try {
-        string temp = state.dump().c_str();
-        state = json::parse(value.getString(runtime).utf8(runtime));
-        string stateStringified = state.dump();
-        bool stateHasChanged = stateStringified != temp;
-
-        return stateHasChanged;
-      } catch (json::exception &error) {
-        return false;
-      }
+        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
+        state = String::createFromUtf8(runtime, parsedPayload.dump());
+      } catch (json::exception &error) {}
     }
-    
-    bool patch(Runtime &runtime, const Value &value) {
-      if (!value.isString()) {
-        JSError(runtime, "[react-native-offstore] only string value supported for patch, consider wrapping your payload with JSON.stringify beforehand.");
-        return false;
+
+    void patch(Runtime &runtime, const Value &payload) {
+      if (!payload.isString()) {
+        return;
       }
 
       try {
-        string temp = state.dump().c_str();
-        state.merge_patch(json::parse(value.getString(runtime).utf8(runtime)));
-        string stateStringified = state.dump();
-        bool stateHasChanged = stateStringified != temp;
+        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
+        json parsedState = json::parse(payload.getString(runtime).utf8(runtime));
 
-        return stateHasChanged;
-      } catch (json::exception &error) {
-        return false;
-      }
+        parsedState.merge_patch(parsedPayload);
+        state = String::createFromUtf8(runtime, parsedState.dump());
+      } catch (json::exception &error) {}
     }
   };
 }
