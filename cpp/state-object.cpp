@@ -37,10 +37,10 @@ namespace offstore {
       }
 
       try {
+        json parsedState = json::parse(state.getString(runtime).utf8(runtime));
         json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
-        json parsedState = json::parse(payload.getString(runtime).utf8(runtime));
 
-        parsedState.merge_patch(parsedPayload);
+        parsedState.patch(parsedPayload);
         state = String::createFromUtf8(runtime, parsedState.dump());
       } catch (json::exception &error) {}
     }
