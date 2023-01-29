@@ -10,15 +10,13 @@ namespace offstore {
   class NativeHostObject : public HostObject {
 
   public:
-    explicit NativeHostObject(Runtime& runtime, string temporaryDirectory) {
+    explicit NativeHostObject(Runtime &jsRuntime, string temporaryDirectory) {
       cachePtr = make_shared<NativeStateCache>(temporaryDirectory);
-      statePtr = make_shared<NativeStateObject>();
+      statePtr = make_shared<NativeStateObject>(jsRuntime);
       dispatcherPtr = make_shared<NativeStateDispatcher>();
       
-      /**
-        * Hydrate initial state from cache
-       */
-      statePtr->set(runtime, String::createFromUtf8(runtime, cachePtr->read()));
+      // Hydrate initial state from cache
+      statePtr->set(jsRuntime, String::createFromUtf8(jsRuntime, cachePtr->read()));
     }
     virtual ~NativeHostObject() {}
 
@@ -27,77 +25,78 @@ namespace offstore {
     shared_ptr<NativeStateObject> statePtr;
     shared_ptr<NativeStateDispatcher> dispatcherPtr;
     
-    Value subscribe(Runtime &runtime) {
-      return Function::createFromHostFunction(
-        runtime,
-        PropNameID::forAscii(runtime, "subscribe"),
-        2,
-        [this, dispatcherPtr = dispatcherPtr](
-          Runtime &runtime,
-          const Value &thisValue,
-          const Value *arguments,
-          size_t count
+    Value subscribe(Runtime &jsRuntime) {
+      auto onSuccess = [dispatcherPtr = dispatcherPtr](Runtime &jsRuntime, string callbackPath, Function callbackFn) {
+        dispatcherPtr->subscribe(jsRuntime, callbackPath, move(callbackFn));
+      };
+
+      return Function::createFromHostFunction(jsRuntime, PropNameID::forAscii(jsRuntime, "subscribe"), 2,
+        [onSuccess](
+          Runtime &jsRuntime, const Value &thisValue, const Value *arguments, size_t count
         ) -> Value {
-          dispatcherPtr->subscribe(
-            runtime,
-            arguments[0].asString(runtime).utf8(runtime),
-            arguments[1].asObject(runtime).asFunction(runtime)
+          onSuccess(
+            jsRuntime,
+            arguments[0].asString(jsRuntime).utf8(jsRuntime),
+            arguments[1].asObject(jsRuntime).asFunction(jsRuntime)
           );
           
           return Value();
         });
     };
     
-    Value patch(Runtime &runtime) {
+    Value patch(Runtime &jsRuntime) {
       return Function::createFromHostFunction(
-        runtime,
-        PropNameID::forAscii(runtime, "patch"),
+        jsRuntime,
+        PropNameID::forAscii(jsRuntime, "patch"),
         1,
-        [this, dispatcherPtr = dispatcherPtr](
-          Runtime &runtime,
+        [this, dispatcherPtr = dispatcherPtr, cachePtr = cachePtr](
+          Runtime &jsRuntime,
           const Value &thisValue,
           const Value *arguments,
           size_t count
         ) -> Value {
-          statePtr->patch(
-            runtime,
-            arguments[0]
-          );
+          auto diff = statePtr->patch(jsRuntime, arguments[0]);
+
+          // Send updated state to all subscribed callbacks
+          dispatcherPtr->dispatchAll(jsRuntime, statePtr->get(jsRuntime), diff);
+
+          // Persist state into phone's disk cache
+          cachePtr->write((statePtr->get(jsRuntime)).getString(jsRuntime).utf8(jsRuntime));
           
           return Value();
         });
     };
     
   public:
-    Value get(Runtime &runtime, const PropNameID &name) override {
-      auto prop = name.utf8(runtime);
+    Value get(Runtime &jsRuntime, const PropNameID &name) override {
+      auto prop = name.utf8(jsRuntime);
       
       if (prop == "state") {
-        return statePtr->get(runtime);
+        return statePtr->get(jsRuntime);
       }
       
       if (prop == "subscribe") {
-        return subscribe(runtime);
+        return subscribe(jsRuntime);
       }
       
       if (prop == "patch") {
-        return patch(runtime);
+        return patch(jsRuntime);
       }
       
       return Value::undefined();
     }
 
-    void set(Runtime& runtime, const PropNameID& name, const Value& value) override {
-      auto prop = name.utf8(runtime);
+    void set(Runtime &jsRuntime, const PropNameID& name, const Value& value) override {
+      auto prop = name.utf8(jsRuntime);
 
       if (prop == "state") {
-        statePtr->set(runtime, value);
+        auto diff = statePtr->set(jsRuntime, value);
 
         // Send updated state to all subscribed callbacks
-        dispatcherPtr->dispatchAll(runtime, statePtr->get(runtime));
+        dispatcherPtr->dispatchAll(jsRuntime, statePtr->get(jsRuntime), diff);
 
         // Persist state into phone's disk cache
-        cachePtr->write((statePtr->get(runtime)).getString(runtime).utf8(runtime));
+        cachePtr->write((statePtr->get(jsRuntime)).getString(jsRuntime).utf8(jsRuntime));
       }
     }
   };

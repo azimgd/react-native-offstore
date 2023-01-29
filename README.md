@@ -51,8 +51,9 @@ Offstore.patchState({ app: { beta: true } });
 
 /**
  * Subscribe to state changes
+ * Emits when {user: {details: {}}} has changed
  */
-const unsubscribe = Offstore.subscribe(console.log);
+const unsubscribe = Offstore.subscribe('/user/details', console.log);
 
 /**
  * Unsubscribe from state changes

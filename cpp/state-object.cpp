@@ -9,7 +9,8 @@ namespace offstore {
   class NativeStateObject {
 
   public:
-    explicit NativeStateObject() {}
+    explicit NativeStateObject(Runtime &jsRuntime) :
+      state(String::createFromUtf8(jsRuntime, "{}")) {}
     virtual ~NativeStateObject() {}
 
   protected:
@@ -20,29 +21,40 @@ namespace offstore {
       return state.getString(runtime);
     }
 
-    void set(Runtime &runtime, const Value &payload) {
+    json set(Runtime &runtime, const Value &payload) {
       if (!payload.isString()) {
-        return;
-      }
-
-      try {
-        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
-        state = String::createFromUtf8(runtime, parsedPayload.dump());
-      } catch (json::exception &error) {}
-    }
-
-    void patch(Runtime &runtime, const Value &payload) {
-      if (!payload.isString()) {
-        return;
+        throw JSError(runtime, "Could not set state, payload must be a string");
       }
 
       try {
         json parsedState = json::parse(state.getString(runtime).utf8(runtime));
         json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
+        json parsedDiff = json::diff(parsedPayload, parsedState);
 
-        parsedState.patch(parsedPayload);
-        state = String::createFromUtf8(runtime, parsedState.dump());
-      } catch (json::exception &error) {}
+        state = String::createFromUtf8(runtime, parsedPayload.dump());
+        return parsedDiff;
+      } catch (json::exception &error) {
+        throw JSError(runtime, "Could not set state, payload must be a valid json");
+      }
+    }
+
+    json patch(Runtime &runtime, const Value &payload) {
+      if (!payload.isString()) {
+        throw JSError(runtime, "Could not patch state, payload must be a string");
+      }
+
+      try {
+        json parsedState = json::parse(state.getString(runtime).utf8(runtime));
+        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
+        json parsedPatch = parsedState;
+        parsedState.merge_patch(parsedPayload);
+        json parsedDiff = json::diff(parsedPatch, parsedState);
+        
+        state = String::createFromUtf8(runtime, parsedPatch.dump());
+        return parsedDiff;
+      } catch (json::exception &error) {
+        throw JSError(runtime, "Could not patch state, payload must be a valid json");
+      }
     }
   };
 }

@@ -10,7 +10,7 @@ using namespace::facebook::jsi;
 using namespace::std;
 
 namespace offstore {
-  void setup(Runtime& runtime, shared_ptr<CallInvoker> jsCallInvoker, string temporaryDirectory);
+  void setup(Runtime &jsRuntime, shared_ptr<CallInvoker> jsCallInvoker, string temporaryDirectory);
 }
 
 #endif /* OFFSTORE_H */
