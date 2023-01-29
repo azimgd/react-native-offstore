@@ -44,6 +44,15 @@ namespace offstore {
         });
     };
     
+    Value pointer(Runtime &jsRuntime) {
+      return Function::createFromHostFunction(jsRuntime, PropNameID::forAscii(jsRuntime, "at"), 1,
+        [this](
+          Runtime &jsRuntime, const Value &thisValue, const Value *arguments, size_t count
+        ) -> Value {
+          return statePtr->pointer(jsRuntime, arguments[0].getString(jsRuntime).utf8(jsRuntime));
+        });
+    };
+    
     Value patch(Runtime &jsRuntime) {
       return Function::createFromHostFunction(
         jsRuntime,
@@ -73,6 +82,10 @@ namespace offstore {
       
       if (prop == "state") {
         return statePtr->get(jsRuntime);
+      }
+      
+      if (prop == "pointer") {
+        return pointer(jsRuntime);
       }
       
       if (prop == "subscribe") {

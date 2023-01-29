@@ -50,6 +50,11 @@ Offstore.setState({ app: { version: 1.5, beta: false }, data: ['optical', 'matri
 Offstore.patchState({ app: { beta: true } });
 
 /**
+ * JSON pointer https://tools.ietf.org/html/rfc6901
+ */
+Offstore.pointer('/app/version');
+
+/**
  * Subscribe to state changes
  * Emits when {user: {details: {}}} has changed
  */

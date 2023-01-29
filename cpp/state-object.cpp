@@ -21,6 +21,13 @@ namespace offstore {
       return state.getString(runtime);
     }
 
+    Value pointer(Runtime &runtime, string path) {
+      json parsedState = json::parse(state.getString(runtime).utf8(runtime));
+      json parsedPath = parsedState[operator""_json_pointer(path.c_str(), path.length())];
+
+      return String::createFromUtf8(runtime, parsedPath.dump());
+    }
+
     json set(Runtime &runtime, const Value &payload) {
       if (!payload.isString()) {
         throw JSError(runtime, "Could not set state, payload must be a string");

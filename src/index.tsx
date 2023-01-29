@@ -8,6 +8,7 @@ declare global {
   var __OffstoreProxy: object | null;
   var __OffstoreHostObject: {
     patch: (payload: any) => void;
+    pointer: (path: string) => any;
     subscribe: (path: string, payload: any) => void;
     unsubscribe: (path: string) => void;
     state: any;
@@ -26,6 +27,14 @@ export function setup(): boolean {
  */
 export function getState(): any {
   const payload = JSON.parse(global.__OffstoreHostObject.state);
+  return payload;
+}
+
+/**
+ * Get Offstore state object.
+ */
+export function pointer(path: string): any {
+  const payload = JSON.parse(global.__OffstoreHostObject.pointer(path));
   return payload;
 }
 
