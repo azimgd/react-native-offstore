@@ -7,9 +7,9 @@ import twittel from './twittel.json';
 import * as utils from './utils';
 
 export const STORAGE_EXPENSIVE_KEY = 'expensive';
-export const STORAGE_EXPENSIVE_PAYLOAD = JSON.stringify(twitter);
+export const STORAGE_EXPENSIVE_PAYLOAD = twitter;
 export const STORAGE_CHEAP_KEY = 'cheap';
-export const STORAGE_CHEAP_PAYLOAD = JSON.stringify(twittel);
+export const STORAGE_CHEAP_PAYLOAD = twittel;
 
 export const setupExpensiveSequentialBenchmark = () => {
   Offstore.setState(STORAGE_EXPENSIVE_PAYLOAD);
@@ -54,7 +54,7 @@ export default function App() {
     setupCheapSequentialBenchmark();
     setTimeCheap(performCheapSequentialBenchmark());
 
-    setupCheapSequentialBenchmark();
+    setupExpensiveSequentialBenchmark();
     setTimeWrite(performSequentialWriteBenchmark());
   }, []);
 
