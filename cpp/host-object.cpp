@@ -66,11 +66,11 @@ namespace offstore {
         ) -> Value {
           auto diff = statePtr->patch(jsRuntime, arguments[0]);
 
-          // Send updated state to all subscribed callbacks
-          dispatcherPtr->dispatchAll(jsRuntime, statePtr->get(jsRuntime), diff);
-
-          // Persist state into phone's disk cache
-          cachePtr->write((statePtr->get(jsRuntime)).getString(jsRuntime).utf8(jsRuntime));
+//          // Send updated state to all subscribed callbacks
+//          dispatcherPtr->dispatchAll(jsRuntime, statePtr->get(jsRuntime), diff);
+//
+//          // Persist state into phone's disk cache
+//          cachePtr->write((statePtr->get(jsRuntime)).getString(jsRuntime).utf8(jsRuntime));
           
           return Value();
         });
@@ -106,10 +106,10 @@ namespace offstore {
         auto diff = statePtr->set(jsRuntime, value);
 
         // Send updated state to all subscribed callbacks
-        dispatcherPtr->dispatchAll(jsRuntime, statePtr->get(jsRuntime), diff);
-
-        // Persist state into phone's disk cache
-        cachePtr->write((statePtr->get(jsRuntime)).getString(jsRuntime).utf8(jsRuntime));
+//        dispatcherPtr->dispatchAll(jsRuntime, statePtr->get(jsRuntime), diff);
+//
+//        // Persist state into phone's disk cache
+//        cachePtr->write((statePtr->get(jsRuntime)).getString(jsRuntime).utf8(jsRuntime));
       }
     }
   };
