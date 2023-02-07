@@ -65,19 +65,22 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.item}>
-        [READ] Offstore (~15K/Loc): {timeExpensive.toFixed(2)} ms
+        <Text style={styles.strong}>[READ|650kb]</Text> Offstore:&nbsp;
+        {timeExpensive.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        [READ] Offstore (400/Loc): {timeCheap.toFixed(2)} ms
+        <Text style={styles.strong}>[READ|15kb]</Text> Offstore:&nbsp;
+        {timeCheap.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        [WRITE] Offstore (~15K/Loc): {timeWrite.toFixed(2)} ms
+        <Text style={styles.strong}>[WRITE|650kb]</Text> Offstore:&nbsp;
+        {timeWrite.toFixed(2)} ms
       </Text>
       <TouchableOpacity
         onPress={runBenchmarks}
         style={[styles.buttonDefault, styles.item]}
       >
-        <Text>Refresh</Text>
+        <Text style={styles.alternative}>Test offstore</Text>
       </TouchableOpacity>
     </View>
   );
@@ -91,11 +94,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonDefault: {
-    backgroundColor: 'gray',
+    backgroundColor: 'green',
     padding: 10,
   },
-  buttonDanger: {
-    backgroundColor: 'red',
-    padding: 10,
+  alternative: {
+    color: '#fafafa',
+  },
+  strong: {
+    fontWeight: '600',
   },
 });
