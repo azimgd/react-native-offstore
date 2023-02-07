@@ -74,7 +74,7 @@ export default function App() {
           .then(setTimeCheap)
       )
       .then(() =>
-        setupCheapSequentialBenchmark()
+        setupExpensiveSequentialBenchmark()
           .then(performSequentialWriteBenchmark)
           .then(setTimeWrite)
       );
