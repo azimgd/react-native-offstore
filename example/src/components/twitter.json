@@ -15466,6 +15466,486 @@
       "retweeted": false,
       "possibly_sensitive": false,
       "lang": "ja"
+    },
+    {
+      "metadata": {
+        "result_type": "recent",
+        "iso_language_code": "ja"
+      },
+      "created_at": "Sun Aug 31 00:28:56 +0000 2014",
+      "id": 505874847260352513,
+      "id_str": "505874847260352513",
+      "text": "【マイリスト】【彩りりあ】妖怪体操第一　踊ってみた【反転】 http://t.co/PjL9if8OZC #sm24357625",
+      "source": "<a href=\"http://www.nicovideo.jp/\" rel=\"nofollow\">ニコニコ動画</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1609789375,
+        "id_str": "1609789375",
+        "name": "食いしん坊前ちゃん",
+        "screen_name": "2no38mae",
+        "location": "ニノと二次元の間",
+        "description": "ニコ動で踊り手やってます!!応援本当に嬉しいですありがとうございます!!　ぽっちゃりだけど前向きに頑張る腐女子です。嵐と弱虫ペダルが大好き！【お返事】りぷ(基本は)”○”　DM (同業者様を除いて)”×”　動画の転載は絶対にやめてください。 ブログ→http://t.co/8E91tqoeKX　　",
+        "url": "http://t.co/ulD2e9mcwb",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "http://t.co/ulD2e9mcwb",
+                "expanded_url": "http://www.nicovideo.jp/mylist/37917495",
+                "display_url": "nicovideo.jp/mylist/37917495",
+                "indices": [
+                  0,
+                  22
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": [
+              {
+                "url": "http://t.co/8E91tqoeKX",
+                "expanded_url": "http://ameblo.jp/2no38mae/",
+                "display_url": "ameblo.jp/2no38mae/",
+                "indices": [
+                  125,
+                  147
+                ]
+              }
+            ]
+          }
+        },
+        "protected": false,
+        "followers_count": 560,
+        "friends_count": 875,
+        "listed_count": 11,
+        "created_at": "Sun Jul 21 05:09:43 +0000 2013",
+        "favourites_count": 323,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 3759,
+        "lang": "ja",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F2C6E4",
+        "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1609789375/1375752225",
+        "profile_link_color": "FF9EDD",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 0,
+      "favorite_count": 0,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "sm24357625",
+            "indices": [
+              53,
+              64
+            ]
+          }
+        ],
+        "symbols": [],
+        "urls": [
+          {
+            "url": "http://t.co/PjL9if8OZC",
+            "expanded_url": "http://nico.ms/sm24357625",
+            "display_url": "nico.ms/sm24357625",
+            "indices": [
+              30,
+              52
+            ]
+          }
+        ],
+        "user_mentions": []
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "ja"
+    },
+    {
+      "metadata": {
+        "result_type": "recent",
+        "iso_language_code": "ja"
+      },
+      "created_at": "Sun Aug 31 00:28:56 +0000 2014",
+      "id": 505874847260352513,
+      "id_str": "505874847260352513",
+      "text": "【マイリスト】【彩りりあ】妖怪体操第一　踊ってみた【反転】 http://t.co/PjL9if8OZC #sm24357625",
+      "source": "<a href=\"http://www.nicovideo.jp/\" rel=\"nofollow\">ニコニコ動画</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1609789375,
+        "id_str": "1609789375",
+        "name": "食いしん坊前ちゃん",
+        "screen_name": "2no38mae",
+        "location": "ニノと二次元の間",
+        "description": "ニコ動で踊り手やってます!!応援本当に嬉しいですありがとうございます!!　ぽっちゃりだけど前向きに頑張る腐女子です。嵐と弱虫ペダルが大好き！【お返事】りぷ(基本は)”○”　DM (同業者様を除いて)”×”　動画の転載は絶対にやめてください。 ブログ→http://t.co/8E91tqoeKX　　",
+        "url": "http://t.co/ulD2e9mcwb",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "http://t.co/ulD2e9mcwb",
+                "expanded_url": "http://www.nicovideo.jp/mylist/37917495",
+                "display_url": "nicovideo.jp/mylist/37917495",
+                "indices": [
+                  0,
+                  22
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": [
+              {
+                "url": "http://t.co/8E91tqoeKX",
+                "expanded_url": "http://ameblo.jp/2no38mae/",
+                "display_url": "ameblo.jp/2no38mae/",
+                "indices": [
+                  125,
+                  147
+                ]
+              }
+            ]
+          }
+        },
+        "protected": false,
+        "followers_count": 560,
+        "friends_count": 875,
+        "listed_count": 11,
+        "created_at": "Sun Jul 21 05:09:43 +0000 2013",
+        "favourites_count": 323,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 3759,
+        "lang": "ja",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F2C6E4",
+        "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1609789375/1375752225",
+        "profile_link_color": "FF9EDD",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 0,
+      "favorite_count": 0,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "sm24357625",
+            "indices": [
+              53,
+              64
+            ]
+          }
+        ],
+        "symbols": [],
+        "urls": [
+          {
+            "url": "http://t.co/PjL9if8OZC",
+            "expanded_url": "http://nico.ms/sm24357625",
+            "display_url": "nico.ms/sm24357625",
+            "indices": [
+              30,
+              52
+            ]
+          }
+        ],
+        "user_mentions": []
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "ja"
+    },
+    {
+      "metadata": {
+        "result_type": "recent",
+        "iso_language_code": "ja"
+      },
+      "created_at": "Sun Aug 31 00:28:56 +0000 2014",
+      "id": 505874847260352513,
+      "id_str": "505874847260352513",
+      "text": "【マイリスト】【彩りりあ】妖怪体操第一　踊ってみた【反転】 http://t.co/PjL9if8OZC #sm24357625",
+      "source": "<a href=\"http://www.nicovideo.jp/\" rel=\"nofollow\">ニコニコ動画</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1609789375,
+        "id_str": "1609789375",
+        "name": "食いしん坊前ちゃん",
+        "screen_name": "2no38mae",
+        "location": "ニノと二次元の間",
+        "description": "ニコ動で踊り手やってます!!応援本当に嬉しいですありがとうございます!!　ぽっちゃりだけど前向きに頑張る腐女子です。嵐と弱虫ペダルが大好き！【お返事】りぷ(基本は)”○”　DM (同業者様を除いて)”×”　動画の転載は絶対にやめてください。 ブログ→http://t.co/8E91tqoeKX　　",
+        "url": "http://t.co/ulD2e9mcwb",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "http://t.co/ulD2e9mcwb",
+                "expanded_url": "http://www.nicovideo.jp/mylist/37917495",
+                "display_url": "nicovideo.jp/mylist/37917495",
+                "indices": [
+                  0,
+                  22
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": [
+              {
+                "url": "http://t.co/8E91tqoeKX",
+                "expanded_url": "http://ameblo.jp/2no38mae/",
+                "display_url": "ameblo.jp/2no38mae/",
+                "indices": [
+                  125,
+                  147
+                ]
+              }
+            ]
+          }
+        },
+        "protected": false,
+        "followers_count": 560,
+        "friends_count": 875,
+        "listed_count": 11,
+        "created_at": "Sun Jul 21 05:09:43 +0000 2013",
+        "favourites_count": 323,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 3759,
+        "lang": "ja",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F2C6E4",
+        "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1609789375/1375752225",
+        "profile_link_color": "FF9EDD",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 0,
+      "favorite_count": 0,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "sm24357625",
+            "indices": [
+              53,
+              64
+            ]
+          }
+        ],
+        "symbols": [],
+        "urls": [
+          {
+            "url": "http://t.co/PjL9if8OZC",
+            "expanded_url": "http://nico.ms/sm24357625",
+            "display_url": "nico.ms/sm24357625",
+            "indices": [
+              30,
+              52
+            ]
+          }
+        ],
+        "user_mentions": []
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "ja"
+    },
+    {
+      "metadata": {
+        "result_type": "recent",
+        "iso_language_code": "ja"
+      },
+      "created_at": "Sun Aug 31 00:28:56 +0000 2014",
+      "id": 505874847260352513,
+      "id_str": "505874847260352513",
+      "text": "【マイリスト】【彩りりあ】妖怪体操第一　踊ってみた【反転】 http://t.co/PjL9if8OZC #sm24357625",
+      "source": "<a href=\"http://www.nicovideo.jp/\" rel=\"nofollow\">ニコニコ動画</a>",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 1609789375,
+        "id_str": "1609789375",
+        "name": "食いしん坊前ちゃん",
+        "screen_name": "2no38mae",
+        "location": "ニノと二次元の間",
+        "description": "ニコ動で踊り手やってます!!応援本当に嬉しいですありがとうございます!!　ぽっちゃりだけど前向きに頑張る腐女子です。嵐と弱虫ペダルが大好き！【お返事】りぷ(基本は)”○”　DM (同業者様を除いて)”×”　動画の転載は絶対にやめてください。 ブログ→http://t.co/8E91tqoeKX　　",
+        "url": "http://t.co/ulD2e9mcwb",
+        "entities": {
+          "url": {
+            "urls": [
+              {
+                "url": "http://t.co/ulD2e9mcwb",
+                "expanded_url": "http://www.nicovideo.jp/mylist/37917495",
+                "display_url": "nicovideo.jp/mylist/37917495",
+                "indices": [
+                  0,
+                  22
+                ]
+              }
+            ]
+          },
+          "description": {
+            "urls": [
+              {
+                "url": "http://t.co/8E91tqoeKX",
+                "expanded_url": "http://ameblo.jp/2no38mae/",
+                "display_url": "ameblo.jp/2no38mae/",
+                "indices": [
+                  125,
+                  147
+                ]
+              }
+            ]
+          }
+        },
+        "protected": false,
+        "followers_count": 560,
+        "friends_count": 875,
+        "listed_count": 11,
+        "created_at": "Sun Jul 21 05:09:43 +0000 2013",
+        "favourites_count": 323,
+        "utc_offset": null,
+        "time_zone": null,
+        "geo_enabled": false,
+        "verified": false,
+        "statuses_count": 3759,
+        "lang": "ja",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "F2C6E4",
+        "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/378800000029400927/114b242f5d838ec7cb098ea5db6df413.jpeg",
+        "profile_background_tile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/487853237723095041/LMBMGvOc_normal.jpeg",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1609789375/1375752225",
+        "profile_link_color": "FF9EDD",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 0,
+      "favorite_count": 0,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "sm24357625",
+            "indices": [
+              53,
+              64
+            ]
+          }
+        ],
+        "symbols": [],
+        "urls": [
+          {
+            "url": "http://t.co/PjL9if8OZC",
+            "expanded_url": "http://nico.ms/sm24357625",
+            "display_url": "nico.ms/sm24357625",
+            "indices": [
+              30,
+              52
+            ]
+          }
+        ],
+        "user_mentions": []
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "ja"
     }
   ],
   "search_metadata": {

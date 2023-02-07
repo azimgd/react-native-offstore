@@ -21,18 +21,22 @@ export const setupCheapSequentialBenchmark = async () => {
 
 export const performExpensiveSequentialBenchmark = async () => {
   const start = performance.now();
-  await utils.sequentialIterationAsync(100, () =>
-    AsyncStorage.getItem(STORAGE_EXPENSIVE_KEY)
-  );
+  await utils.sequentialIterationAsync(100, async () => {
+    const response = await AsyncStorage.getItem(STORAGE_EXPENSIVE_KEY);
+    // '/statuses/1/metadata/iso_language_code'
+    return JSON.parse(response || '').statuses[1].metadata.iso_language_code;
+  });
   const end = performance.now();
   return end - start;
 };
 
 export const performCheapSequentialBenchmark = async () => {
   const start = performance.now();
-  await utils.sequentialIterationAsync(100, () =>
-    AsyncStorage.getItem(STORAGE_CHEAP_KEY)
-  );
+  await utils.sequentialIterationAsync(100, async () => {
+    const response = await AsyncStorage.getItem(STORAGE_CHEAP_KEY);
+    // '/statuses/1/metadata/iso_language_code'
+    return JSON.parse(response || '').statuses[1].metadata.iso_language_code;
+  });
   const end = performance.now();
   return end - start;
 };
@@ -70,40 +74,31 @@ export default function App() {
           .then(setTimeCheap)
       )
       .then(() =>
-        setupCheapSequentialBenchmark()
+        setupExpensiveSequentialBenchmark()
           .then(performSequentialWriteBenchmark)
           .then(setTimeWrite)
       );
   }, []);
 
-  const pollStorage = React.useCallback(() => {
-    setInterval(() => {
-      AsyncStorage.getItem(STORAGE_CHEAP_KEY);
-    }, 20);
-  }, []);
-
   return (
     <View style={styles.container}>
       <Text style={styles.item}>
-        [READ] AsyncStorage (~15K/Loc): {timeExpensive.toFixed(2)} ms
+        <Text style={styles.strong}>[100xREAD|650kb]</Text> AsyncStorage:&nbsp;
+        {timeExpensive.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        [READ] AsyncStorage (400/Loc): {timeCheap.toFixed(2)} ms
+        <Text style={styles.strong}>[100xREAD|15kb]</Text> AsyncStorage:&nbsp;
+        {timeCheap.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        [WRITE] AsyncStorage (Write) (~15K/Loc): {timeWrite.toFixed(2)} ms
+        <Text style={styles.strong}>[100xWRITE|650kb]</Text> AsyncStorage:&nbsp;
+        {timeWrite.toFixed(2)} ms
       </Text>
       <TouchableOpacity
         onPress={runBenchmarks}
         style={[styles.buttonDefault, styles.item]}
       >
-        <Text>Refresh</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={pollStorage}
-        style={[styles.buttonDanger, styles.item]}
-      >
-        <Text>Expensive polling</Text>
+        <Text style={styles.alternative}>Test asyncstorage</Text>
       </TouchableOpacity>
     </View>
   );
@@ -117,11 +112,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonDefault: {
-    backgroundColor: 'gray',
+    backgroundColor: 'green',
     padding: 10,
   },
-  buttonDanger: {
-    backgroundColor: 'red',
-    padding: 10,
+  alternative: {
+    color: '#fafafa',
+  },
+  strong: {
+    fontWeight: '600',
   },
 });

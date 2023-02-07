@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "11.0" }
   s.source       = { :git => "https://github.com/azimgd/react-native-offstore.git", :tag => "#{s.version}" }
 
-  s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,hpp,cpp}", "includes/**/*.{h,hpp,cpp}"
+  s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{h,hpp,c,cpp}", "includes/**/*.{h,hpp,c,cpp}"
 
   s.dependency "React-callinvoker"
   s.dependency "React"

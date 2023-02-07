@@ -21,14 +21,18 @@ export const setupCheapSequentialBenchmark = () => {
 
 export const performExpensiveSequentialBenchmark = () => {
   const start = performance.now();
-  utils.sequentialIterationSync(100, () => Offstore.getState());
+  utils.sequentialIterationSync(100, () =>
+    Offstore.pointer('/statuses/1/metadata/iso_language_code')
+  );
   const end = performance.now();
   return end - start;
 };
 
 export const performCheapSequentialBenchmark = () => {
   const start = performance.now();
-  utils.sequentialIterationSync(100, () => Offstore.getState());
+  utils.sequentialIterationSync(100, () =>
+    Offstore.pointer('/statuses/1/metadata/iso_language_code')
+  );
   const end = performance.now();
   return end - start;
 };
@@ -58,34 +62,25 @@ export default function App() {
     setTimeWrite(performSequentialWriteBenchmark());
   }, []);
 
-  const pollStorage = React.useCallback(() => {
-    setInterval(() => {
-      Offstore.getState();
-    }, 20);
-  }, []);
-
   return (
     <View style={styles.container}>
       <Text style={styles.item}>
-        [READ] Offstore (~15K/Loc): {timeExpensive.toFixed(2)} ms
+        <Text style={styles.strong}>[100xREAD|650kb]</Text> Offstore:&nbsp;
+        {timeExpensive.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        [READ] Offstore (400/Loc): {timeCheap.toFixed(2)} ms
+        <Text style={styles.strong}>[100xREAD|15kb]</Text> Offstore:&nbsp;
+        {timeCheap.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        [WRITE] Offstore (~15K/Loc): {timeWrite.toFixed(2)} ms
+        <Text style={styles.strong}>[100xWRITE|650kb]</Text> Offstore:&nbsp;
+        {timeWrite.toFixed(2)} ms
       </Text>
       <TouchableOpacity
         onPress={runBenchmarks}
         style={[styles.buttonDefault, styles.item]}
       >
-        <Text>Refresh</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={pollStorage}
-        style={[styles.buttonDanger, styles.item]}
-      >
-        <Text>Expensive polling</Text>
+        <Text style={styles.alternative}>Test offstore</Text>
       </TouchableOpacity>
     </View>
   );
@@ -99,11 +94,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonDefault: {
-    backgroundColor: 'gray',
+    backgroundColor: 'green',
     padding: 10,
   },
-  buttonDanger: {
-    backgroundColor: 'red',
-    padding: 10,
+  alternative: {
+    color: '#fafafa',
+  },
+  strong: {
+    fontWeight: '600',
   },
 });

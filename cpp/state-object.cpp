@@ -1,65 +1,56 @@
 #include <jsi/jsi.h>
 #include "json.hpp"
+#include "cjson.h"
+#include "cjson-utils.h"
 
 using namespace::std;
 using namespace::facebook::jsi;
-using namespace::nlohmann;
 
 namespace offstore {
   class NativeStateObject {
 
   public:
-    explicit NativeStateObject(Runtime &jsRuntime) :
-      state(String::createFromUtf8(jsRuntime, "{}")) {}
+    explicit NativeStateObject(Runtime &jsRuntime) {}
     virtual ~NativeStateObject() {}
 
   protected:
-    Value state;
+    cJSON *parsedState;
     
   public:
     Value get(Runtime &runtime) {
-      return state.getString(runtime);
+      return String::createFromUtf8(runtime, cJSON_Print(parsedState));
     }
 
     Value pointer(Runtime &runtime, string path) {
-      json parsedState = json::parse(state.getString(runtime).utf8(runtime));
-      json parsedPath = parsedState[operator""_json_pointer(path.c_str(), path.length())];
+      auto response = cJSON_Print(cJSONUtils_GetPointer(parsedState, path.c_str()));
 
-      return String::createFromUtf8(runtime, parsedPath.dump());
+      return String::createFromUtf8(runtime, response);
     }
 
-    json set(Runtime &runtime, const Value &payload) {
+    void set(Runtime &runtime, const Value &payload) {
       if (!payload.isString()) {
         throw JSError(runtime, "Could not set state, payload must be a string");
       }
 
       try {
-        json parsedState = json::parse(state.getString(runtime).utf8(runtime));
-        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
-        json parsedDiff = json::diff(parsedPayload, parsedState);
+        cJSON *parsedPayload = cJSON_Parse(payload.getString(runtime).utf8(runtime).c_str());
 
-        state = String::createFromUtf8(runtime, parsedPayload.dump());
-        return parsedDiff;
-      } catch (json::exception &error) {
+        parsedState = parsedPayload;
+      } catch (...) {
         throw JSError(runtime, "Could not set state, payload must be a valid json");
       }
     }
 
-    json patch(Runtime &runtime, const Value &payload) {
+    void patch(Runtime &runtime, const Value &payload) {
       if (!payload.isString()) {
         throw JSError(runtime, "Could not patch state, payload must be a string");
       }
 
       try {
-        json parsedState = json::parse(state.getString(runtime).utf8(runtime));
-        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
-        json parsedPatch = parsedState;
-        parsedState.merge_patch(parsedPayload);
-        json parsedDiff = json::diff(parsedPatch, parsedState);
+        cJSON *parsedPayload = cJSON_Parse(payload.getString(runtime).utf8(runtime).c_str());
         
-        state = String::createFromUtf8(runtime, parsedPatch.dump());
-        return parsedDiff;
-      } catch (json::exception &error) {
+        cJSONUtils_MergePatch(parsedState, parsedPayload);
+      } catch (...) {
         throw JSError(runtime, "Could not patch state, payload must be a valid json");
       }
     }

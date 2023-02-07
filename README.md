@@ -53,17 +53,6 @@ Offstore.patchState({ app: { beta: true } });
  * JSON pointer https://tools.ietf.org/html/rfc6901
  */
 Offstore.pointer('/app/version');
-
-/**
- * Subscribe to state changes
- * Emits when {user: {details: {}}} has changed
- */
-const unsubscribe = Offstore.subscribe('/user/details', console.log);
-
-/**
- * Unsubscribe from state changes
- */
-unsubscribe();
 ```
 
 ## Contributing
