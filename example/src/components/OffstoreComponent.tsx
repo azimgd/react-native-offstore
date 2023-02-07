@@ -65,15 +65,15 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.item}>
-        <Text style={styles.strong}>[READ|650kb]</Text> Offstore:&nbsp;
+        <Text style={styles.strong}>[100xREAD|650kb]</Text> Offstore:&nbsp;
         {timeExpensive.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        <Text style={styles.strong}>[READ|15kb]</Text> Offstore:&nbsp;
+        <Text style={styles.strong}>[100xREAD|15kb]</Text> Offstore:&nbsp;
         {timeCheap.toFixed(2)} ms
       </Text>
       <Text style={styles.item}>
-        <Text style={styles.strong}>[WRITE|650kb]</Text> Offstore:&nbsp;
+        <Text style={styles.strong}>[100xWRITE|650kb]</Text> Offstore:&nbsp;
         {timeWrite.toFixed(2)} ms
       </Text>
       <TouchableOpacity

@@ -5,7 +5,6 @@
 
 using namespace::std;
 using namespace::facebook::jsi;
-using namespace::nlohmann;
 
 namespace offstore {
   class NativeStateObject {
@@ -37,7 +36,7 @@ namespace offstore {
         cJSON *parsedPayload = cJSON_Parse(payload.getString(runtime).utf8(runtime).c_str());
 
         parsedState = parsedPayload;
-      } catch (json::exception &error) {
+      } catch (...) {
         throw JSError(runtime, "Could not set state, payload must be a valid json");
       }
     }
@@ -51,7 +50,7 @@ namespace offstore {
         cJSON *parsedPayload = cJSON_Parse(payload.getString(runtime).utf8(runtime).c_str());
         
         cJSONUtils_MergePatch(parsedState, parsedPayload);
-      } catch (json::exception &error) {
+      } catch (...) {
         throw JSError(runtime, "Could not patch state, payload must be a valid json");
       }
     }
