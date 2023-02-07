@@ -1,16 +1,10 @@
 const Offstore = require('./NativeOffstore').default;
 
 declare global {
-  function subscribe(
-    path: string,
-    callback: (payload: string, diff: string) => void
-  ): void;
   var __OffstoreProxy: object | null;
   var __OffstoreHostObject: {
     patch: (payload: any) => void;
     pointer: (path: string) => any;
-    subscribe: (path: string, payload: any) => void;
-    unsubscribe: (path: string) => void;
     state: any;
   };
 }
@@ -50,16 +44,4 @@ export function setState(payload: any): any {
  */
 export function patchState(payload: any): any {
   global.__OffstoreHostObject.patch(JSON.stringify(payload));
-}
-
-/**
- * Subscribe to Offstore state changes. Returns a function to unsubscribe.
- * This function is only called on state changes.
- */
-export function subscribe(
-  path: string,
-  callback: (payload: any, diff: any) => any
-) {
-  global.__OffstoreHostObject.subscribe(path, callback);
-  return () => global.__OffstoreHostObject.unsubscribe(path);
 }

@@ -21,14 +21,18 @@ export const setupCheapSequentialBenchmark = () => {
 
 export const performExpensiveSequentialBenchmark = () => {
   const start = performance.now();
-  utils.sequentialIterationSync(100, () => Offstore.getState());
+  utils.sequentialIterationSync(100, () =>
+    Offstore.pointer('/statuses/1/metadata/iso_language_code')
+  );
   const end = performance.now();
   return end - start;
 };
 
 export const performCheapSequentialBenchmark = () => {
   const start = performance.now();
-  utils.sequentialIterationSync(100, () => Offstore.getState());
+  utils.sequentialIterationSync(100, () =>
+    Offstore.pointer('/statuses/1/metadata/iso_language_code')
+  );
   const end = performance.now();
   return end - start;
 };
@@ -58,12 +62,6 @@ export default function App() {
     setTimeWrite(performSequentialWriteBenchmark());
   }, []);
 
-  const pollStorage = React.useCallback(() => {
-    setInterval(() => {
-      Offstore.getState();
-    }, 20);
-  }, []);
-
   return (
     <View style={styles.container}>
       <Text style={styles.item}>
@@ -80,12 +78,6 @@ export default function App() {
         style={[styles.buttonDefault, styles.item]}
       >
         <Text>Refresh</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={pollStorage}
-        style={[styles.buttonDanger, styles.item]}
-      >
-        <Text>Expensive polling</Text>
       </TouchableOpacity>
     </View>
   );

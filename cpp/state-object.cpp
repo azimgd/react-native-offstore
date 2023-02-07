@@ -11,54 +11,46 @@ namespace offstore {
   class NativeStateObject {
 
   public:
-    explicit NativeStateObject(Runtime &jsRuntime) :
-      state(String::createFromUtf8(jsRuntime, "{}")) {}
+    explicit NativeStateObject(Runtime &jsRuntime) {}
     virtual ~NativeStateObject() {}
 
   protected:
-    Value state;
+    cJSON *parsedState;
     
   public:
     Value get(Runtime &runtime) {
-      return state.getString(runtime);
+      return String::createFromUtf8(runtime, cJSON_Print(parsedState));
     }
 
     Value pointer(Runtime &runtime, string path) {
-      json parsedState = json::parse(state.getString(runtime).utf8(runtime));
-      json parsedPath = parsedState[operator""_json_pointer(path.c_str(), path.length())];
+      auto response = cJSON_Print(cJSONUtils_GetPointer(parsedState, path.c_str()));
 
-      return String::createFromUtf8(runtime, parsedPath.dump());
+      return String::createFromUtf8(runtime, response);
     }
 
-    json set(Runtime &runtime, const Value &payload) {
+    void set(Runtime &runtime, const Value &payload) {
       if (!payload.isString()) {
         throw JSError(runtime, "Could not set state, payload must be a string");
       }
 
       try {
-        json parsedState = json::parse(state.getString(runtime).utf8(runtime));
-        json parsedPayload = json::parse(payload.getString(runtime).utf8(runtime));
-        json parsedDiff = json::diff(parsedPayload, parsedState);
+        cJSON *parsedPayload = cJSON_Parse(payload.getString(runtime).utf8(runtime).c_str());
 
-        state = String::createFromUtf8(runtime, parsedPayload.dump());
-        return parsedDiff;
+        parsedState = parsedPayload;
       } catch (json::exception &error) {
         throw JSError(runtime, "Could not set state, payload must be a valid json");
       }
     }
 
-    json patch(Runtime &runtime, const Value &payload) {
+    void patch(Runtime &runtime, const Value &payload) {
       if (!payload.isString()) {
         throw JSError(runtime, "Could not patch state, payload must be a string");
       }
 
       try {
-        auto monitor = state.getString(runtime).utf8(runtime).c_str();
-        auto result = cJSON_Print(cJSONUtils_GetPointer(cJSON_Parse(monitor), "/statuses/0/metadata"));
+        cJSON *parsedPayload = cJSON_Parse(payload.getString(runtime).utf8(runtime).c_str());
         
-        printf("debug: %s", result);
-
-        return json::diff(json::object(), json::object());
+        cJSONUtils_MergePatch(parsedState, parsedPayload);
       } catch (json::exception &error) {
         throw JSError(runtime, "Could not patch state, payload must be a valid json");
       }
